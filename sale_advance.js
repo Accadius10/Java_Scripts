@@ -38,10 +38,18 @@ function add() {
     purchases[purchaseIndex].number += number;
   }
 
-  window.alert(`Produit ajouté: ${product.name} Prix: ${product.price}円 Quantité: ${number}`);
+  const totalNumber = purchases.reduce((acc, p) => {
+    if (p.product.id === product.id) {
+      return acc + p.number;
+    }
+    return acc;
+  }, 0);
+
+  window.alert(`Produit ajouté: ${product.name} Prix: ${product.price}円 Quantité Totale: ${totalNumber}`);
   priceElement.value = "";
   numberElement.value = "";
 }
+
 
 function subtotal() {
   return purchases.reduce((prev, purchase) => {
